@@ -1,0 +1,42 @@
+<div class="container text-center css-selector">
+    <mat-card class="my-card mt-4 mb-4 mx-auto">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>INICIO DE SESIÓN</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="centrar">
+
+
+        <!-- drop-zone -->
+        <div class="drop-zone">
+          <div class="drop-message">
+            <div *ngIf="isLoggedIn()">
+              <mat-icon class="mat-48">check_circle</mat-icon>
+              <p>Usted está logueado</p>
+            </div>
+            <div *ngIf="!isLoggedIn()">
+              <mat-icon class="mat-48">report</mat-icon>
+              <p>Usted NO está logueado</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <mat-card-header class="justify-content-center">
+          <mat-card-title class="subtitle align-text-center">
+            <div *ngIf="isLoggedIn()">
+              Usted está logueado
+            </div>
+            <div *ngIf="!isLoggedIn()">
+              Usted NO está logueado
+            </div>
+          </mat-card-title>
+        </mat-card-header> -->
+
+      </mat-card-content>
+      <mat-card-actions class="d-flex">
+        <button mat-flat-button class="mx-auto sign-in-button" button (click)="redirect()" *ngIf="isLoggedIn()">Ris link</button>
+        <button mat-flat-button class="mx-auto sign-in-button" button (click)="login()" *ngIf="!isLoggedIn()">Sign in</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

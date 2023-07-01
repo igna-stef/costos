@@ -1,0 +1,101 @@
+<div class="container text-center css-selector">
+
+  <div class="header">
+    <div *ngIf="isLoggedIn()" class="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>{{getname()}}</span>
+        </button>
+        <button mat-menu-item (click)="logout()" *ngIf="isLoggedIn()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu> 
+    </div>
+  </div>
+  
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>BYC1: DRAG & DROP</mat-card-title>
+      <mat-card-subtitle>Luego de subir un archivo (una planilla de Excel), automaticamente se copian las filas del archivo a una tabla de SQL Server y luego se ejecuta un proceso especifico que calcula costos.</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content class="centrar">
+
+      <mat-horizontal-stepper class="demo-stepper" id="stepper" #stepper [linear]="true">
+
+        <!-- primer paso -->
+        <mat-step [stepControl]="firstFormGroup" [completed]="completedFirst" [editable]="false">
+          <!-- <button class="btn-stepper" mat-button (click)="siguiente()">Siguiente</button> -->
+
+          <form [formGroup]="firstFormGroup">
+            <!-- drop-zone -->
+            <div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+              <div class="drop-message" *ngIf="!isDragging && !uploading">
+                <mat-icon class="mat-48">cloud_upload</mat-icon>
+                <p>Arrastre y suelte un archivo aquí</p>
+                <p class="small">(Solo se permiten archivos .xlsx de hasta 5 MB)</p>
+                <mat-progress-bar mode="indeterminate" *ngIf="uploading"></mat-progress-bar>
+              </div>
+              <div class="drop-message" *ngIf="isDragging">
+                <mat-icon class="mat-48">file_copy</mat-icon>
+                <p>Suelte el archivo aquí</p>
+              </div>
+              <div class="drop-message" *ngIf="uploading && !isDragging">
+                <mat-icon class="mat-48">cloud_sync</mat-icon>
+                <p>Subiendo archivo...</p>
+                <p class="small">(Refrescar la pagina no cancelará la subida ni lo hará mas rápido, le recomendamos esperar)</p>
+                <mat-progress-bar mode="indeterminate" *ngIf="uploading"></mat-progress-bar>
+              </div>
+            </div>
+            <!-- archivos subidos -->
+            <div class="uploaded-files" *ngIf="uploadedFiles.length > 0">
+              <div>
+                <p>Archivo subido: {{ uploadedFiles[0].name }}</p>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- segundo paso -->
+        <mat-step [stepControl]="secondFormGroup" [completed]="completedSecond" [editable]="false">
+          <!-- <button class="btn-stepper" mat-button matStepperPrevious>Atrás</button> -->
+          <!-- <button class="btn-stepper" mat-button matStepperNext>Siguiente</button> -->
+          <form [formGroup]="secondFormGroup">
+            <div class="drop-zone">
+              <div class="drop-message" *ngIf="processing">
+                <mat-icon class="mat-48">autorenew</mat-icon>
+                <p>procesando...</p>
+                <p class="small">(El procesamiento puede demorar varios minutos, se notificará cuando el proceso termine)</p>
+                <mat-progress-bar mode="indeterminate" *ngIf="processing"></mat-progress-bar>
+              </div>
+              <button mat-raised-button color="primary" *ngIf="!processing" (click)="procesar()">Procesar</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- tercer paso -->
+        <mat-step [stepControl]="thirdFormGroup" [optional]="true">
+          <!-- <button class="btn-stepper" mat-button matStepperPrevious>Atrás</button> -->
+          <form [formGroup]="thirdFormGroup">
+            <div class="drop-zone">
+              <div class="drop-message">
+                <!-- ultima vez actualizado -->
+                <div class="uploaded-files">Períodos subidos en la base de datos:</div>
+                <div class="uploaded-files" *ngFor=" let periodo of periodos">
+                  <li>{{periodo}}</li>
+                </div>
+              </div>
+              <button mat-raised-button color="primary" *ngIf="completedFirst && completedSecond" (click)="reiniciar();stepper.reset()">inicio</button>
+            </div>            
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

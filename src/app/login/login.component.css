@@ -1,0 +1,84 @@
+.sign-in-button{
+    background: #e5e5e5;
+    color: #003865;
+  }
+
+  .sign-in-button:hover{
+    background: #003865;
+    color:  #e5e5e5;
+  }
+
+  .text-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: -webkit-fill-available;
+  }
+  
+  mat-card {
+    width: 25%;
+    max-height: 70%;
+    min-height: auto;
+    margin-top: -200px;
+  }
+  
+  mat-card-actions {
+    margin-left:auto;
+    margin-right: auto;
+    padding:0%;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  mat-card-header{
+    align-items: end;
+  }
+  
+  mat-card-content {
+    text-align: center;
+  }
+  
+  .example-header-image {
+    background-image: url('https://www.fleni.org.ar/wp-content/uploads/2022/11/Logo-Fleni-126.png');
+    background-size: cover;
+  }
+  
+  .css-selector {
+    background: rgb(0,212,255);
+    background: linear-gradient(231deg, rgba(0,212,255,1) 0%, rgba(0,56,101,1) 100%);
+  }
+
+  /* Estilos para la zona de drag and drop */
+.drop-zone {
+  margin-top: 20px;
+  /* border: 2px dashed #ccc; */
+  border-radius: 20px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* margin-bottom: 50px; Espacio entre la zona de drag and drop y el resto del contenido */
+}
+
+/* Estilos para los mensajes dentro de la zona de drag and drop */
+.drop-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ccc;
+  /* margin-bottom: 10px; */
+}
+
+.drop-message p.small {
+  font-size: 0.8rem;
+}

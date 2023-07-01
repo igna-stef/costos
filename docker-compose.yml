@@ -1,0 +1,17 @@
+version: '3'
+services:
+  byc1-front:
+    container_name: byc1-front
+    image: flenisistemas/byc1-front:latest
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    dns: 8.8.8.8
+    dns_search: fleni.org.ar
+    volumes:
+      - /etc/localtime:/etc/localtime:ro  # Para syncronizar el clock del contenedor con el del host
+      - /etc/timezone:/etc/timezone:ro    # Para syncronizar el clock del contenedor con el del host

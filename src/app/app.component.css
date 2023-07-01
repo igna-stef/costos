@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: -webkit-fill-available;
+    background: rgb(0,212,255);
+    background: linear-gradient(231deg, rgba(0,212,255,1) 0%, rgba(0,56,101,1) 100%);
+}
